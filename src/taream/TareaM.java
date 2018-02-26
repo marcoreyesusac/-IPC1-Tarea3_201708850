@@ -41,10 +41,10 @@ public class TareaM {
 		System.out.println("5. Salir");
 		switch(IngresoNum()){ //Switch usado para que se lleve a la opción que eligió el usuaio.
 			case 1:
-				Usuarios();
+				Usuarios(); //Así se llama a los métodos de java.
 				break;
 			case 2:
-				contadorDigitos();
+				contadorDigitos(); //así se llama a los métodos de java.
 				break;
 			case 3:
 				mayorAMenor();
@@ -52,7 +52,11 @@ public class TareaM {
 			case 4:
 				promedio();
 				break;
-			default:
+		
+                                case 5:
+				System.exit(0); //Método predeterminado de Java para cerrar la aplicación.
+				break;
+                        default:
 				System.out.println("No es una opción válida."); // Si el usuario no ingresa opciones válidas, se regresará al menú.
 				Menu();
 				break;
@@ -63,7 +67,110 @@ public class TareaM {
 		return teclado.nextInt();
 	}
 	
+	static void Usuarios(){
+		System.out.println("1. Ingresar usuarios");
+		System.out.println("2. Mostrar usuarios ascendente");
+		System.out.println("3. Mostrar usuarios descendente");
+		System.out.println("4. Menu");
+		
+		switch(IngresoNum()){
+			case 1: //Se ingresan los usuarios
+				System.out.println("Ingrese los usuarios");
+				teclado.nextLine();
+				int a=0;
+                                for(int i = 0; i < 5; i++){ //for utilizado para ingresar los usuarios al array usuarios.
+					System.out.println("Ingrese el usuario " + (i+1)+ ":");
+					usuarios[i] = teclado.nextLine();
+				 //for utilizado para ingresar los usuarios al array usuarios.
+				if(a>0){
+                                for(int g=i;g>=0;g--){
+                                    
+                   if(g==0){}else{
+while((usuarios[i]).equals(usuarios[g-1])){	
+                                    System.out.println("Ingrese el usuario " + (i+1)+ " nuevamente:"); //Se hace la comprobación de que el usuario no exista
+                                                                                                        //en el array
+					usuarios[i] = teclado.nextLine();
+}
+                   
+                   }
+                                }
+                                }
+                                a=5;
+                                }
+                                
+				ordenUsuarios(); //Se llama al método ordenusuarios, de esta manera cuando se de el case 2 y 3 los nombres ya tendrán 
+				Usuarios();      //una posición númerica en el array, según su orden alfabético.
+				break;
+			case 2:
+				for(int i = 0; i < 5; i++){ //Se imprimen los usuarios de manera ascendente.
+					System.out.println(usuarios[i]);
+				}
+				Usuarios();
+				break;
+			case 3:
+				for(int i = 4; i > -1; i--){ //Se imprimen los usuarios de manera descendente.
+					System.out.println(usuarios[i]);
+				}
+				Usuarios();
+				break;
+			case 4:
+				Menu();
+				break;
+			default:
+				System.out.println("No es una opción válida.");
+				Usuarios();
+				break;
+		}
+	}
 	
+	static void ordenUsuarios(){ //Método utilzado para ordenar los usuarios por medio de la comparacion, tras comparar se asigna un valor mayor o
+                                        //menor a la cadena en el array.
+		  for(int j=0;j<4;j++) {
+	             for(int i=0;i<4-j;i++) {
+	                 if (usuarios[i].compareTo(usuarios[i+1])>0) {
+	                     String aux;
+	                     aux=usuarios[i];
+	                     usuarios[i]=usuarios[i+1];
+	                     usuarios[i+1]=aux;
+	                 }
+	             }
+	         }
+	}
+	
+	static void contadorDigitos(){ //Método para el contador de dígitos, aca se encuentran todos los proceso para contar los dígitos.
+		System.out.println("1. Ingresar numero");
+		System.out.println("2. Mostrar numero de digitos");
+		System.out.println("3. Menu principal");
+		
+		
+		switch(IngresoNum()){
+			case 1: //Se ingresa el número al que se contaran los digitos.
+				System.out.println("Ingrese el numero a comprobar: ");
+				numero = IngresoNum();
+				
+				if((numero > 100000)|| (numero < 0)){
+					System.out.println("No es una opción válida.");
+				}else{
+					while(numero >= 10){
+						contDig++;
+						numero /= 10;
+					}
+				}
+				contadorDigitos(); //se llama al método para volver al menu.
+				break;
+			case 2:
+				System.out.println("El numero tiene " + contDig + " digitos.");
+				contadorDigitos();
+				break;
+			case 3:
+				Menu();
+				break;
+			default:
+				System.out.println("No es una opción válida.");
+				contadorDigitos();
+				break;
+		}
+	}
 	
 	static void mayorAMenor(){ //Método para ordenar 3 números de mayor a menor.
 		System.out.println("1. Ingresar numeros");
@@ -83,8 +190,8 @@ public class TareaM {
 				}else{
 					menor = medio;
 				}
-				System.out.println("Ingrese el tercer numero: ");
-				medio = IngresoNum();
+				System.out.println("Ingrese el tercer numero: "); //Se agrega el tercer número y se compara con los otros dos valores
+				medio = IngresoNum();                               //para ordenarlos de mayor a menor
 				if(medio > mayor){
 					int aux = mayor;
 					mayor = medio;
